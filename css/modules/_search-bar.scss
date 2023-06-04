@@ -1,0 +1,14 @@
+@import "../palette";
+
+.search-bar {
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.125rem;
+  border: 1px solid $main;
+
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+.search-bar::placeholder {
+  color: $main;
+}

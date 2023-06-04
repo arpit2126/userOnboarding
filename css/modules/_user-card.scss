@@ -1,0 +1,37 @@
+.user-card {
+  display: flex;
+  flex-wrap: wrap;
+  flex: 0 0 1;
+  width: 450px;
+  align-items: center;
+
+  margin: 0.75rem 0;
+  padding: 0.75rem;
+
+  &__picture {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin-right: 0.75rem;
+
+    width: 20%;
+  }
+
+  &__picture__img {
+    border-radius: 50%;
+    width: 100%;
+  }
+
+  &__info__name {
+    font-size: 1.25rem;
+    margin: 0.25rem 0;
+    width: 100%;
+  }
+
+  &__info__phone {
+    display: block;
+    margin: 0.25rem 0;
+    width: 100%;
+  }
+}

@@ -1,0 +1,17 @@
+@import "../palette";
+
+.loader {
+  border: 0.25rem solid $main-darker;
+  border-bottom-color: transparent;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+
+  animation: spinning 0.5s linear normal;
+}
+
+@keyframes spinning {
+  to {
+    transform: rotate(360deg);
+  }
+}
