@@ -16,55 +16,51 @@ import Loader from './components/Loader';
 
 import './css/index.scss';
 
-const store = createStore(
-  rootReducer,
-  applyMiddleware(thunk, createLogger())
-);
+const store = createStore(rootReducer, applyMiddleware(thunk, createLogger()));
 
 class App extends Component {
-  componentDidMount () {
+  componentDidMount() {
     this.props.fetchUsers();
   }
 
-  render () {
-    const 
-      users = this.props
-                  .filtered
-                  .map(
-                    (user, index) =>
-                      (<UserCard key={index} user={user}/>)
-                  );
+  render() {
+    const users = this.props.filtered.map((user, index) => (
+      <UserCard key={index} user={user} deleteUser={this.props.deleteUser} />
+    ));
     return (
       <React.Fragment>
-        <SearchBar handleChange={this.props.handleChange}/>
-        {(this.props.isFetching) ? <Loader /> : null}
-        <div>
-          {users}
-        </div>
+        <SearchBar handleChange={this.props.handleChange} />
+        {this.props.isFetching ? <Loader /> : null}
+        <div>{users}</div>
       </React.Fragment>
     );
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   filtered: state.filtered,
   onLoadError: state.onLoadError,
-  isFetching: state.isFetching
+  isFetching: state.isFetching,
 });
 
-const mapDispatchToProps = dispatch => ({
-  handleChange: event => {
+const mapDispatchToProps = (dispatch) => ({
+  handleChange: (event) => {
     dispatch(actions.searchUser(event.target.value.trim()));
   },
   fetchUsers: () => {
     dispatch(actions.fetchUsers());
-  }
+  },
+  deleteUser: (event) => {
+    console.log('==>', event.target.id);
+    dispatch(actions.deleteUser(event.target.id));
+  },
 });
 
-const 
-  AppContainer = connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(App);
+const AppContainer = connect(mapStateToProps, mapDispatchToProps)(App);
 
-render(<Provider store={store}><AppContainer/></Provider>, document.getElementById('root'));
+render(
+  <Provider store={store}>
+    <AppContainer />
+  </Provider>,
+  document.getElementById('root')
+);

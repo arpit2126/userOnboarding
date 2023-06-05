@@ -1,24 +1,28 @@
 import * as actions from './actions';
 
-function flatten (user) {
-  return Object
-    .entries(user)
-    .reduce((acc, curr) => (
-      acc + curr.reduce((acc, curr) => (acc + curr))
-    ));
+function flatten(user) {
+  return Object.entries(user).reduce(
+    (acc, curr) => acc + curr.reduce((acc, curr) => acc + curr)
+  );
 }
 
-function searchUser (users, hint) {
-  return users.filter(user => flatten(user).includes(hint));
+function searchUser(users, hint) {
+  return users.filter((user) => flatten(user).includes(hint));
 }
 
-export default function rootReducer (
+function deleteUser(users, username) {
+  return users.filter((x) => {
+    return x.username !== username;
+  });
+}
+
+export default function rootReducer(
   state = {
     users: [],
     filtered: [],
     onLoadError: false,
     isFetching: false,
-    hint: ''
+    hint: '',
   },
   action
 ) {
@@ -26,34 +30,33 @@ export default function rootReducer (
     case actions.SEARCH_USER:
       return {
         ...state,
-        filtered: searchUser(state.users, action.hint)
-      }
+        filtered: searchUser(state.users, action.hint),
+      };
       break;
     case actions.FETCH_USERS:
       return {
         ...state,
-        isFetching: true
-      }
+        isFetching: true,
+      };
     case actions.FETCH_USERS_ERROR:
       return {
         ...state,
         isFetching: false,
-        onLoadError: true
-      }
+        onLoadError: true,
+      };
     case actions.FETCH_USERS_SUCCESS:
       return {
         ...state,
         users: action.users,
         filtered: action.users,
-        isFetching: false
-      }
-      case actions.FETCH_USERS_SUCCESS:
+        isFetching: false,
+      };
+    case actions.DELETE_USER:
       return {
         ...state,
-        users: action.users,
-        filtered: action.users,
-        isFetching: false
-      }
+        users: deleteUser(state.users, action.user),
+        filtered: deleteUser(state.users, action.user),
+      };
     default:
       return state;
   }

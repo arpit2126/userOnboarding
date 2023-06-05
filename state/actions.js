@@ -3,6 +3,7 @@ export const FETCH_USERS = 'FETCH_USERS';
 export const FETCH_USERS_ERROR = 'FETCH_USERS_ERROR';
 export const FETCH_USERS_SUCCESS = 'FETCH_USERS_SUCCESS';
 export const UPDATE_USER = 'UPDATE_USER';
+export const DELETE_USER = 'DELETE_USER';
 
 export const URL = 'https://jsonplaceholder.typicode.com/users';
 
@@ -36,5 +37,10 @@ export const fetchUsers = () => (dispatch) => {
 
 export const updateUser = (user) => ({
   type: UPDATE_USER,
+  user,
+});
+
+export const deleteUser = (user) => ({
+  type: DELETE_USER,
   user,
 });
