@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-export default function UserCard({ user, deleteUser }) {
+export default function UserCard({ user, deleteUser, updateUser }) {
   const name = Object.values(user.name).reduce((acc, curr) => acc + ' ' + curr);
 
   return (
@@ -23,6 +23,15 @@ export default function UserCard({ user, deleteUser }) {
             onClick={deleteUser}
             className="user-card__delete__img"
             src={'https://cdn-icons-png.flaticon.com/512/3405/3405244.png'}
+            id={user.username}
+            alt={name}
+          />
+        </span>
+        <span>
+          <img
+            onClick={updateUser}
+            className="user-card__edit__img"
+            src={'https://cdn-icons-png.flaticon.com/512/6065/6065488.png'}
             id={user.username}
             alt={name}
           />

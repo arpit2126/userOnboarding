@@ -16,6 +16,12 @@ function deleteUser(users, username) {
   });
 }
 
+function updateUser(users, username) {
+  return users.filter((x) => {
+    return x.username !== username;
+  });
+}
+
 export default function rootReducer(
   state = {
     users: [],
@@ -56,6 +62,12 @@ export default function rootReducer(
         ...state,
         users: deleteUser(state.users, action.user),
         filtered: deleteUser(state.users, action.user),
+      };
+    case actions.UPDATE_USER:
+      return {
+        ...state,
+        users: updateUser(state.users, action.user),
+        filtered: updateUser(state.users, action.user),
       };
     default:
       return state;

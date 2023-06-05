@@ -2,7 +2,7 @@
   display: flex;
   flex-wrap: wrap;
   flex: 0 0 1;
-  width: 450px;
+  width: 600px;
   align-items: center;
 
   margin: 0.75rem 0;
@@ -37,5 +37,11 @@
   &__delete__img {
     width: 10%;
     height: 20px;
+  }
+  &__edit__img {
+    width: 10%;
+    height: 20px;
+    scale: 2;
+    margin-left: 10px;
   }
 }
